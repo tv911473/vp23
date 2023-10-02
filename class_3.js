@@ -5,7 +5,7 @@ const datetimeValue = require("./datetime_et");
 const fs = require("fs");   //file system
 //let folkWisdom = "";
 
-fs.readFile("./vanasonad.txt", "utf8", (err, data)=>{
+fs.readFile("./txtfiles/vanasonad.txt", "utf8", (err, data)=>{
     if(err){
         console.log(err);
     }
