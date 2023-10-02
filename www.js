@@ -2,11 +2,12 @@ const http = require('http');
 const url = require('url');
 const path = require('path');
 const fs = require('fs');
-
+const dateTime = require('./datetime_et');
 const pageHead = '<!DOCTYPE html>\n<html>\n<head>\n\t<meta charset="utf-8">\n\t<title>Vendt, web.23</title></head><body>';
 const pageBanner = '\n\t<img src="banner.png" alt="Kursuse banner">';
 const pageBody = '\n\t<h1>Taavi Vendt</h1>\n\t<p>Web valmis <a href="https://www.tlu.ee"target="_blank">TLÜ</a> DTI Informaatika eriala õppetöö raames!</p>';
 const pageFoot = '\n\t<hr></body></html>';
+
 http.createServer(function(req, res){    //req >> request; res >> result
     let currentURL = url.parse(req.url, true);
     console.log(currentURL);
@@ -15,8 +16,11 @@ http.createServer(function(req, res){    //req >> request; res >> result
         res.write(pageHead);
         res.write(pageBanner);
         res.write(pageBody);
-        res.write('\n\t<hr>\n\t<p><a href="addname">Lisa oma nimi</a>!</p>')
+        res.write('\n\t<hr>\n\t<p><a href="addname">Lisa oma nimi</a>!</p>');
         res.write(pageFoot);
+        res.write('<p>Lehe avamisel oli kell ' + dateTime.timeOfToday() + ', ' + dateTime.timeOfDay() + '</p>');
+        res.write('<p>Täna on ' + dateTime.dateOfToday() + ', ' + dateTime.dayOfToday() + '</p');
+
         //console.log('keegi vaatab');
         return res.end();
     }
@@ -31,7 +35,7 @@ http.createServer(function(req, res){    //req >> request; res >> result
         return res.end();
     }
     else if (currentURL.pathname === '/banner.png'){
-        //console.log('Tahame pilti!')
+        console.log('Tahame pilti!')
         let bannerPath = path.join(__dirname, 'public', 'banner');
         fs.readFile(bannerPath + currentURL.pathname, (err, data)=>{
             if (err){
