@@ -25,13 +25,13 @@ const timeOfDay = function(){
 		partOfDay = "hommik";
 	}
 	if(hourNow >= 10 && hourNow < 14){
-		partOfDay = "louna";
+		partOfDay = "lõuna";
 	}
 	if (hourNow >= 14 && hourNow < 18){
-		partOfDay = "parastlouna";
+		partOfDay = "pärastlõuna";
 	}
 	if(hourNow >= 18){
-		partOfDay = "ohtu";
+		partOfDay = "õhtu";
 	}
 	return partOfDay;
 }
